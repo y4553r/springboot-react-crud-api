@@ -11,14 +11,14 @@
 			<h1>Employee Directory</h1>
 			<hr />
 			<h3>Save Employee</h3>
-			<form>
+			<form action="#" th:action="@{/employees/save}" th:object="${employee}" method="POST">
 				<label>First Name</label>
-				<input type="text" placeholder="First Name" />
+				<input type="text" th:field="*{firstName}" placeholder="First Name" class="form-control mb-4 col-4" />
 				<label>Last Name</label>
-				<input type="text" placeholder="Last Name" />
+				<input type="text" th:field="*{lastName}" placeholder="Last Name" class="form-control mb-4 col-4" />
 				<label>Email Name</label>
-				<input type="email" placeholder="Email" />
-				<input type="submit" class="btn btn-primary" />
+				<input type="email" th:field="*{email}" placeholder="Email" class="form-control mb-4 col-4" />
+				<input type="submit" class="btn btn-info" />
 			</form>
 			<hr />
 			<a href="/employees/list">Back to Employees list</a>

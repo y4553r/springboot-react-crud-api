@@ -10,7 +10,7 @@
 		<div class="container">
 			<h1>Employees List</h1>
 			<hr />
-			<a class="btn btn-primary btn-sm mb-3" th:href="@{/employees/addForm}">Add new employee</a>
+			<a class="btn btn-primary btn-sm mb-3" th:href="@{/employees/formForAdd}">Add new employee</a>
 			<table class="table table-bordered table-stripped">
 				<thead class="thead-dark">
 					<tr>
@@ -26,8 +26,11 @@
 						<td th:text="${employee.lastName}"/>
 						<td th:text="${employee.email}"/>
 						<td>
-							<button class="btn btn-primary">Update</button>
-							<button class="btn btn-danger">Delete</button>
+							<a class="btn btn-info" th:href="@{'/employees/formForEdit/' + ${employee.id}}">Update</a>
+							<form action="#" method="POST" th:action="@{'/employees/delete/' + ${employee.id}}" >
+<!-- 								<input type="hidden" th:object="${employee.id}" /> -->
+								<button type="submit" class="btn btn-danger">Delete</button>
+							</form>	
 						</td>
 					</tr>
 				</tbody>
