@@ -25,11 +25,10 @@
 						<td th:text="${employee.firstName}"/>
 						<td th:text="${employee.lastName}"/>
 						<td th:text="${employee.email}"/>
-						<td>
-							<a class="btn btn-info" th:href="@{'/employees/formForEdit/' + ${employee.id}}">Update</a>
-							<form action="#" method="POST" th:action="@{'/employees/delete/' + ${employee.id}}" >
-<!-- 								<input type="hidden" th:object="${employee.id}" /> -->
-								<button type="submit" class="btn btn-danger">Delete</button>
+						<td class="d-flex flex-row justify-content-around">
+							<a class="btn btn-info" th:href="@{/employees/formForUpdate(employeeId=${employee.id})}">Update</a>
+							<form action="#" method="POST" th:action="@{/employees/delete(employeeId=${employee.id})}" >
+								<button type="submit" class="btn btn-danger" onclick="if(!(confirm('Are you sure to delete this employee?'))) return false;">Delete</button>
 							</form>	
 						</td>
 					</tr>

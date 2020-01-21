@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +23,8 @@ public class EmployeeController {
 	
 	@GetMapping("/list")
 	public String renderEmployeesList(Model model) {
-		List<Employee> employees = employeeRepository.findAll();
+//		List<Employee> employees = employeeRepository.findAll(Sort.by(Sort.Direction.ASC, "lastName"));
+		List<Employee> employees = employeeRepository.findAllByOrderByLastNameAsc();
 		model.addAttribute("employees", employees);
 		return "employeeslist";
 	}
@@ -43,15 +43,15 @@ public class EmployeeController {
 		return "redirect:/employees/list";
 	}
 	
-	@GetMapping("/formForEdit/{id}")
-	public String renderFormForEdit(Model model, @PathVariable("id") long id) {
+	@GetMapping("/formForUpdate")
+	public String renderFormForEdit(Model model, @RequestParam("employeeId") long id) {
 		Employee employee = employeeRepository.findById(id).get();
 		model.addAttribute("employee", employee);
 		return "employees/employeeForm";
 	}
 	
-	@PostMapping("/employees/delete/{id}")
-	public String deleteEmployee(@PathVariable long id) {
+	@PostMapping("/delete")
+	public String deleteEmployee(@RequestParam("employeeId") long id) {
 		employeeRepository.deleteById(id);
 		return "redirect:/employees/list";
 	}
